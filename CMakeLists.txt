@@ -5,11 +5,13 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Core)
 # Define library sources and headers
 set(LIB_SOURCES
     src/model.cpp
+    src/RequestHandler.cpp
     # Add more source files as needed
 )
 
 set(LIB_HEADERS
     include/model.h
+    include/RequestHandler.h
     # Add more header files as needed
 )
 

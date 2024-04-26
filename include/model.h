@@ -1,3 +1,6 @@
+#pragma once
+
+#include <QByteArray>
 #include <QDateTime>
 
 #include <string>
@@ -36,19 +39,19 @@ public:
     Dog(const Dog&) = default;
     const Dog &operator=(const Dog&) const = delete;
 
+    std::string _name;
     std::string _breed;
     Male _male = Male::Man;
     float _wheight = 0.;
     int age = 0;
     Character _character = Character::Passion;
-    std::string _icon; // path to local bitmaps cache
+    QByteArray _icon; // path to local bitmaps cache (byte array to simplicy)
     bool _sterilized = false;
 
     const std::string &getName() const { return _name; }
     const DogOwner &getOwner() const { return _dogOwner; }
 
 private:
-    std::string _name;
     const DogOwner &_dogOwner;
 };
 
@@ -58,26 +61,27 @@ using DogPtr = std::shared_ptr<Dog>;
 class DogOwner
 {
 public:
+    DogOwner() = default;
+    DogOwner(const std::string &email, const std::string &password)
+        : _email(email), _password(password) {}
+
     DogOwner(const DogOwner&) = delete;
     const DogOwner &operator=(const DogOwner&) const = delete;
 
     std::string _name;
     Male _male = Male::Man;
-    std::string _icon; // path to local bitmaps cache
+    QByteArray _icon; // path to local bitmaps cache (byte array to simplicy)
+
+    std::string _email;
+    std::string _password;
+    std::unordered_map<std::string, DogPtr> _dogs;
 
     const std::string &getEmail() const { return _email; };
     const std::string & getPassword() const { return _password; };
 
     DogPtr getDog(const std::string &name) const;
     DogPtr addDog(const std::string &name);
-
-private:
-    DogOwner(const std::string &email, const std::string &password)
-        : _email(email), _password(password) {}
-
-    std::string _email;
-    std::string _password;
-    std::unordered_map<std::string, DogPtr> _dogs;
+    const std::unordered_map<std::string, DogPtr> &getDogs() const { return _dogs; };
 };
 
 using DogOwnerPtr = std::shared_ptr<DogOwner>;

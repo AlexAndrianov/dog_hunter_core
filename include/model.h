@@ -12,6 +12,8 @@ struct Coordinate
 {
     float _latitude = 0.f;
     float _longitude = 0.f;
+
+    static float distanceTo(const Coordinate& oneC, const Coordinate& secondC);
 };
 
 enum class Character : int
@@ -57,7 +59,6 @@ private:
 
 using DogPtr = std::shared_ptr<Dog>;
 
-
 class DogOwner
 {
 public:
@@ -94,7 +95,6 @@ public:
 
     QDateTime _date;
     Coordinate _coordinate;
-private:
     std::string _dogOwnerId;
     std::string _dogName;
 };
@@ -103,8 +103,13 @@ class ModelData
 {
 public:
 
+    static ModelData getDummyModelData(); // for tests
+
+    std::vector<Walk> getWalks(const Coordinate &coorinate, float radius, const QDateTime &date);
+
     std::unordered_map<std::string, DogOwnerPtr> _dogOwners;
     std::vector<Walk> _walks;
+    std::string _superUser;
 };
 
 } // namespace dh

@@ -64,7 +64,7 @@ float Coordinate::distanceTo(const Coordinate& oneC, const Coordinate& secondC) 
     return earthRadius * c;
 }
 
-std::vector<Walk> ModelData::getWalks(const Coordinate &coorinate, float radius, const QDateTime &date)
+std::vector<Walk> ModelData::getWalks(const Coordinate &coorinate, float radius, const QDateTime &date) const
 {
     auto filteredData = _walks | std::views::filter([&](const auto& walk) {
                             if(walk._dogOwnerId == _superUser)

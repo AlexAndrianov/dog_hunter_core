@@ -105,7 +105,7 @@ public:
 
     static ModelData getDummyModelData(); // for tests
 
-    std::vector<Walk> getWalks(const Coordinate &coorinate, float radius, const QDateTime &date);
+    std::vector<Walk> getWalks(const Coordinate &coorinate, float radius, const QDateTime &date) const;
 
     std::unordered_map<std::string, DogOwnerPtr> _dogOwners;
     std::vector<Walk> _walks;
